@@ -9,7 +9,7 @@ const Home = () => {
 	const { push, asPath } = useRouter()
 
 	const handleSignOut = async () => {
-		const data = await signOut({ redirect: false , callbackUrl: '/index.js'})
+		const data = await signOut({ redirect: false , callbackUrl: '/some'})
 
 		push(data.url)
 	}
