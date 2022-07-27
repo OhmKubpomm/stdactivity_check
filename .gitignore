@@ -27,7 +27,11 @@ yarn-error.log*
 
 # local env files
 .env*.local
+<<<<<<< HEAD
 
+=======
+.env.local
+>>>>>>> parent of ffe3377 (add env)
 
 # vercel
 .vercel
