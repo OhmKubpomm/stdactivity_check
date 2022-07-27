@@ -38,16 +38,22 @@ const Signin = () => {
 			push('/')
 		}, 5000)
 
-		return <Heading>You are already signed in</Heading>
+		return <Heading>you are already signed in</Heading>
 	}
 
 	const handleOAuthSignIn = (provider) => () => signIn(provider)
 
+	const handleSubmit = (e) => {
+		e.preventDefault()
 
+		if (!email) return false
+
+		signIn('email', { email, redirect: false })
+	}
 
 	return (
 		<Box>
-		
+			
 
 			<VStack>
 				{providers.map(({ name, Icon }) => (
