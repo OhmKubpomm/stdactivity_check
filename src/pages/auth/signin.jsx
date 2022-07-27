@@ -38,7 +38,7 @@ const Signin = () => {
 			push('/')
 		}, 5000)
 
-		return <Heading>you are already signed in</Heading>
+		return <Heading>You are already signed in</Heading>
 	}
 
 	const handleOAuthSignIn = (provider) => () => signIn(provider)
