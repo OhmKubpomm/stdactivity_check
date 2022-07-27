@@ -64,7 +64,7 @@ const Signin = () => {
 						textTransform='uppercase'
 						w='100%'
 					>
-						Sign in with {name}
+						sign in with {name}
 					</Button>
 				))}
 			</VStack>
