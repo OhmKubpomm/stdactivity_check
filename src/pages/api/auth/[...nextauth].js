@@ -5,6 +5,9 @@ import { MongoDBAdapter } from '@next-auth/mongodb-adapter'
 import clientPromise from '../../../database/connectDB'
 
 export default NextAuth({
+	session: {
+		jwt: true
+	  },
 	providers: [
 		GoogleProvider({
 			clientId: process.env.GOOGLE_CLIENT_ID,
