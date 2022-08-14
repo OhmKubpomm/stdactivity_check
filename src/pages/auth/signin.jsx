@@ -52,10 +52,12 @@ const Signin = () => {
 	
 
 	return (
-		<Box>
-			
-
+	
+	
+	<Box>	
+		
 			<VStack>
+			<Heading as='h2' size='xl'>ยินดีต้อนรับเข้าสู่ระบบเว็บเช็คกิจกรรมนักศึกษา</Heading>
 				{providers.map(({ name, Icon }) => (
 					<Button
 						key={name}
@@ -69,6 +71,8 @@ const Signin = () => {
 				))}
 			</VStack>
 		</Box>
+
+		
 	)
 }
 

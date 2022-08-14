@@ -9,7 +9,7 @@ const Home = () => {
 	const { push, asPath } = useRouter()
 
 	const handleSignOut = async () => {
-		const data = await signOut({ redirect: false , callbackUrl: '/some'})
+		const data = await signOut({ redirect: false , callbackUrl: '/'})
 
 		push(data.url)
 	}
@@ -24,7 +24,8 @@ const Home = () => {
 					
 					<Button onClick={handleSignOut}>Sign out</Button>
 				</>
-			) : (
+			) :
+			(
 				<>
 					<Heading>You are not signed in</Heading>
 

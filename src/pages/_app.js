@@ -1,10 +1,12 @@
 import { SessionProvider } from 'next-auth/react'
 import { ChakraProvider, Grid } from '@chakra-ui/react'
-
+// 1. import `NextUIProvider` component
+import { NextUIProvider } from '@nextui-org/react';
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 	return (
 		<SessionProvider session={session}>
 			<ChakraProvider>
+			<NextUIProvider>
 				<Grid
 					sx={{
 						h: '100vh',
@@ -15,8 +17,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 				>
 					<Component {...pageProps} />
 				</Grid>
+				
+    </NextUIProvider>
 			</ChakraProvider>
 		</SessionProvider>
+		
 	)
 }
 
