@@ -58,6 +58,7 @@ const Signin = () => {
 		
 			<VStack>
 			<Heading as='h2' size='xl'>ยินดีต้อนรับเข้าสู่ระบบเว็บเช็คกิจกรรมนักศึกษา</Heading>
+			<Button colorScheme='blue' p='4'>เข้าหน้าผู้ดูแลระบบ</Button>
 				{providers.map(({ name, Icon }) => (
 					<Button
 						key={name}
