@@ -1,13 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react';
 import { Button,Card, Grid, Text,Input,Row,Link,Spacer,useTheme } from '@nextui-org/react';
 import { useForm } from 'react-hook-form';
-
+import { useToast } from '@chakra-ui/react'
+import { useRouter } from 'next/router';
+import { signIn, useSession } from 'next-auth/react';
+import { getError } from '../database/error';
 const some = () => {
  
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { data: session } = useSession();
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const router = useRouter();
+  const { redirect } = router.query;
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    if (session?.user) {
+      router.push(redirect || '/');
+    }
+  }, [router, session, redirect]);
 
 
-
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const toast = useToast()
   const {
     handleSubmit,
     register,
@@ -67,12 +84,12 @@ const some = () => {
               <Button
                 textTransform='uppercase'
                 w='100%'
-               size="sm" shadow color="secondary" auto rounded animated> 
+               size="sm"  color="secondary" auto rounded animated> 
                 สมัครสมาชิก
               </Button>
               </Link>
               <Spacer />
-              <Button size="sm" shadow color="primary" auto rounded animated>
+              <Button size="sm"  color="primary" auto rounded animated onClick={handleSubmit(submitHandler)}>
                 เข้าสู่ระบบ
               </Button>
               </Row>
