@@ -3,9 +3,6 @@ import React from 'react'
 import { Input,Card,Text,Row,Button} from "@nextui-org/react";
 import Link from 'next/link';
 import { SimpleGrid,Box } from '@chakra-ui/react'
-import {useMediaQuery} from '../useMediaQuery.js'
-
-
   
 const regis = () => {
   
@@ -93,7 +90,7 @@ const regis = () => {
              
 
           
-              <Button size="sm" shadow color="gradient" auto >
+              <Button size="sm"  color="gradient"  >
                 ยืนยันการสมัครสมาชิก
               </Button>
           
