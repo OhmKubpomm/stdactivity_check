@@ -8,7 +8,26 @@ const some = () => {
 
 
 
-
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  } = useForm();
+  const submitHandler = async ({ email, password }) => {
+    try {
+      const result = await signIn('credentials', {
+        redirect: false,
+        email,
+        password,
+      });
+      if (result.error) {
+        toast.error(result.error);
+      }
+    } catch (err) {
+      toast.error(getError(err));
+    }
+  };
 
 
 	return  <form onSubmit={handleSubmit(submitHandler)}>
