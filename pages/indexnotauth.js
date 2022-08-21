@@ -1,12 +1,18 @@
 import React from 'react'
 import { Button,Card, Grid, Text,Input,Row,Link,Spacer,useTheme } from '@nextui-org/react';
+import { useForm } from 'react-hook-form';
 
 const some = () => {
+ 
 
-	return  <form method="post">
-  
-		
-    <Text size={30}>ยินดีต้อนรับเข้าสู่ระบบเว็บเช็คกิจกรรมนักศึกษา</Text>
+
+
+
+
+
+
+	return  <form onSubmit={handleSubmit(submitHandler)}>
+   
     <br></br>
 		<Card
 	isHoverable variant="bordered" 
@@ -14,7 +20,7 @@ const some = () => {
   align="center"
   >
     <Card.Header>
-   
+    <Text size={30}>ยินดีต้อนรับเข้าสู่ระบบเว็บเช็คกิจกรรมนักศึกษา</Text>
     </Card.Header>
 	<Card.Body>
 	<Input
@@ -36,32 +42,29 @@ const some = () => {
         />
 	</Card.Body>
   <Card.Footer>
+ 
             <Row justify="flex-end">
-          
-  
-              <Button size="sm" shadow color="primary" auto rounded animated>
-                เข้าสู่ระบบ
-              </Button>
-              </Row>
-              <Spacer />
-             
-
-		
+            <Link href="./user/user_regis">
               <Button
                 textTransform='uppercase'
                 w='100%'
                size="sm" shadow color="secondary" auto rounded animated> 
-               <Link href="./user/user_regis">
                 สมัครสมาชิก
-                </Link>
               </Button>
+              </Link>
+              <Spacer />
+              <Button size="sm" shadow color="primary" auto rounded animated>
+                เข้าสู่ระบบ
+              </Button>
+              </Row>
+         
+             
+
              
           </Card.Footer>
           
   </Card>
   </form>
-
-  ;
 }
 
 export default some
