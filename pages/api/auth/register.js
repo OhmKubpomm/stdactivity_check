@@ -1,5 +1,5 @@
 import bcryptjs from 'bcrypts';
-import User from '../../../table/User';
+import Users from '../../../table/User';
 
 export default async function  Regis(req,res) {
     const body = req.body;
