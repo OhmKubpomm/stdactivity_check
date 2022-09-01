@@ -1,6 +1,6 @@
 import bcryptjs from 'bcryptjs';
 import NextAuth from 'next-auth';
-import Users from '../../../table/User';
+import User from '../../../table/User';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import db from '../../../database/connectdata';
 db();
@@ -19,7 +19,7 @@ export default NextAuth({
 		  async authorize(credentials, req) {
 			const email = credentials.email ;
 			const password = credentials.password ;
-			const user = await Users.findOne ( { email } )
+			const user = await User.findOne ( { email } )
 			if (!user) {
 				throw new Error ( " You haven't registered yet " )
 			}
