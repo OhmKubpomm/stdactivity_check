@@ -3,6 +3,7 @@ import NextAuth from 'next-auth';
 import User from '../../../table/User';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import db from '../../../database/connectdata';
+db();
 
 export default NextAuth({
 	
@@ -28,9 +29,6 @@ export default NextAuth({
 		}
 		})
 	  ],
-	  pages : {
-		signIn : "/signin"
-	} ,
 	secret : "secret",
 	database: process.env.MONGODB_URI,
 
