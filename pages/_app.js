@@ -3,9 +3,14 @@ import { ChakraProvider, Grid } from '@chakra-ui/react'
 // 1. import `NextUIProvider` component
 import { NextUIProvider } from '@nextui-org/react';
 import '/styles/globals.css'
+import {QueryClientProvider,QueryClient} from 'react-query';
+const queryClient = new QueryClient();
+
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 	return (
 		<SessionProvider session={session}>
+			<QueryClientProvider client={queryClient}>
+
 			<ChakraProvider>
 			<NextUIProvider>
 				<Grid
@@ -21,6 +26,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 				
     </NextUIProvider>
 			</ChakraProvider>
+			</QueryClientProvider>
 		</SessionProvider>
 		
 	)

@@ -2,7 +2,8 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import { Heading, Button, Grid } from '@chakra-ui/react'
 import { useSession, signIn, signOut } from 'next-auth/react'
-
+import db from '../database/connectdata'
+db();
 const Home = () => {
 	const { data: session } = useSession()
 
@@ -14,7 +15,7 @@ const Home = () => {
 		push(data.url)
 	}
 
-	const handleSignIn = () => push(`/auth/signin?callbackUrl=${asPath}`)
+	const handleSignIn = () => push(`/indexnotauth`)
 
 	return (
 		<Grid placeItems='center' gridRowGap='1rem'>

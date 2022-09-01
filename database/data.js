@@ -14,6 +14,12 @@ const data = {
       password: bcrypt.hashSync('123456'),
       isAdmin: false,
     },
+    {
+      name: 'ohm',
+      email: 'admin',
+      password: '123456',
+      isAdmin: true,
+    },
   ],
 }
 export default data;
