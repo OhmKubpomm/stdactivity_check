@@ -1,6 +1,6 @@
 import bcryptjs from 'bcryptjs';
 import NextAuth from 'next-auth';
-import Users from '../../../table/User';
+import Users from '../../../../table/User';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import db from '../../../database/connectdata';
 db();
