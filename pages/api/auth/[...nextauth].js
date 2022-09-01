@@ -19,7 +19,7 @@ export default NextAuth({
 		  async authorize(credentials, req) {
 			const email = credentials.email ;
 			const password = credentials.password ;
-			const user = await User.findOne ( { email } )
+			const user = await Users.findOne ( { email } )
 			if (!user) {
 				throw new Error ( " You haven't registered yet " )
 			}
