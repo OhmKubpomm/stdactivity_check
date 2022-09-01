@@ -4,6 +4,7 @@ import User from '../../../table/User';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import db from '../../../database/connectdata';
 db();
+
 export default NextAuth({
 	
 	providers: [
