@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const db = () =>{
+const db = async() =>{
 
 
 if(mongoose.connections[0].readyState){

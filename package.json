@@ -18,7 +18,7 @@
 		"bcryptjs": "^2.4.3",
 		"framer-motion": "^6.2.9",
 		"mongodb": "^4.8.1",
-		"mongoose": "^6.5.2",
+		"mongoose": "^6.5.4",
 		"nanoid": "^3.3.2",
 		"next": "^12.2.5",
 		"next-auth": "^4.10.3",
