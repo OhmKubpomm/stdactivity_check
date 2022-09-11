@@ -1,26 +1,63 @@
 /* eslint-disable @next/next/link-passhref */
-import React from 'react'
+import React,{useReducer} from 'react';
 import { Input,Card,Text,Row,Button} from "@nextui-org/react";
 import Link from 'next/link';
 import { SimpleGrid,Box } from '@chakra-ui/react'
-  
+import { useQueryClient,useMutation } from 'react-query';
+import {addUser} from "../../lib/helper";
+import { useSelector } from 'react-redux';
+
+
+const formReducer=(state,event) =>{
+  return{
+    ...state,
+    [event.target.name]:event.target.value
+  }
+}
+
+
 const regis = () => {
-  
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const state = useSelector ((state) => state)
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const formData = useReducer(formReducer,{})
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const addMutation = useMutation (addUser,{
+    onSuccess:() =>{
+      console.log("Data insert");
+    }   
+  });
+
+  const handleSubmit = (e) =>{
+    e.preventDefault();
+    if(Object.keys(formData).length == 0 )return console.log("don't have form data");
+    let{student_id,student_name,student_date,student_department,student_field,username,password} = formData;
+
+    const model={
+      student_id,student_name,student_date,student_department,student_field,username,password
+    }
+    addMutation.mutate(model)
+  }
+ 
+
     return <SimpleGrid minChildWidth='520px' autoRows autoColumns>
-      <Card css={{ mw: "500px" }} shadow >
+      <Card css={{ mw: "500px" }} shadow="true" >
     <Card.Header>
             <Text h3>สมัครสมาชิก</Text>
           </Card.Header>
           <Card.Divider />
 
     <Card.Body>
-    <form>
+    <form onSubmit={handleSubmit}>
           <Box w={[300, 400, 500]} >
           <Input 
       clearable
-      type="test"
+      type="text"
       label="ชื่อผู้ใช้งาน"
       placeholder="กรุณากรอกชื่อผู้ใช้งาน"
+      
+      name="username"
         />
   </Box>
   <Box w={[300, 400, 500]}>
@@ -29,6 +66,8 @@ const regis = () => {
           label="รหัสนักศึกษา" 
           type="text" 
           placeholder="กรุณากรอกรหัสนักศึกษา"
+          
+          name="student_id"
         />
    </Box>
    <Box w={[300, 400, 500]}>
@@ -38,6 +77,8 @@ const regis = () => {
           type="password"
           label="รหัสผ่าน"
           placeholder="กรุณากรอกรหัสผ่าน"
+          
+          name="password"
         />
      </Box>
      <Box w={[300, 400, 500]}>
@@ -46,6 +87,8 @@ const regis = () => {
           label="ชื่อ-นามสกุล" 
           type="text" 
           placeholder="กรุณาชื่อ-นามสกุล"
+          
+          name="student_name"
         />
          </Box>
          <Box w={[300, 400, 500]}>
@@ -53,6 +96,8 @@ const regis = () => {
           label="วัน/เดือน/ปีเกิด" 
           type="date" 
           placeholder="กรุณากรอกวัน/เดือน/ปีเกิด"
+          
+          name="student_date"
         />
        </Box>
          <Box w={[300, 400, 500]}>
@@ -61,6 +106,8 @@ const regis = () => {
           label="สาขาวิชา" 
           type="text" 
           placeholder="กรุณากรอกสาขาวิชา"
+          
+          name="student_field"
         />
          </Box>
 
@@ -70,6 +117,8 @@ const regis = () => {
           label="แผนก" 
           type="text" 
           placeholder="กรุณากรอกแผนก"
+          
+          name="student_department"
         />
          </Box>
   
@@ -90,7 +139,7 @@ const regis = () => {
              
 
           
-              <Button size="sm"  color="gradient"  >
+              <Button size="sm"  color="gradient" onClick={handleSubmit}>
                 ยืนยันการสมัครสมาชิก
               </Button>
           

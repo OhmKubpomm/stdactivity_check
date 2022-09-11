@@ -7,7 +7,7 @@ import { signIn} from 'next-auth/react';
 const some = ({ csrfToken, providers}) => {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [email,setEmail] = useState('');
+  const [username,setUsername] = useState('');
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [password,setPassword] = useState('');
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -15,7 +15,7 @@ const some = ({ csrfToken, providers}) => {
   
   const signinUser = async(e) => {
       e.preventDefault();
-      let options = {redirect:false,email,password}
+      let options = {redirect:false,username,password}
       const res = await signIn ("credentials",options)
       setMessage(null)
       if (res?.error) {
@@ -47,10 +47,10 @@ const some = ({ csrfToken, providers}) => {
           placeholder="กรุณากรอกชื่อผู้ใช้งาน"
           color="primary"
           type="text"
-          id="email" 
-          name="email"
-          value={email}
-          onChange={e => setEmail(e.target.value)} />
+          id="username" 
+          name="username"
+          value={username}
+          onChange={e => setUsername(e.target.value)} />
         <br></br>
         <Input
           rounded

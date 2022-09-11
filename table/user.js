@@ -1,9 +1,13 @@
-import mongoose from 'mongoose';
+import {Schema,models,model } from 'mongoose';
 
-const userSchema = new mongoose.Schema(
+const userSchema = new Schema(
   {
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
+    student_id:{type: String},
+    student_name: { type: String, required: true },
+    student_date:{type: String },
+    student_department:{type: String},
+    student_field:{type: String},
+    username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     isAdmin: { type: Boolean, required: true, default: false },
   },
@@ -12,5 +16,5 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-const User = mongoose.models.User || mongoose.model('User', userSchema);
+const User = models.users || model('users', userSchema);
 export default User;
