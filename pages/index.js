@@ -20,7 +20,7 @@ const Home = () => {
 		<Grid placeItems='center' gridRowGap='1rem'>
 			{session ? (
 				<>
-					<Heading>signed in as {session.user.email}</Heading>
+					<Heading>signed in as {session.user.username}</Heading>
 					
 					<Button onClick={handleSignOut}>Sign out</Button>
 				</>

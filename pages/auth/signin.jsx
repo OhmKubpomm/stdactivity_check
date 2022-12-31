@@ -28,7 +28,7 @@ const providers = [
 const Signin = () => {
 	const { data: session, status } = useSession()
 	const { push } = useRouter()
-	const [email, setEmail] = useState('')
+	const [username, setusername] = useState('')
 
 	console.log(session)
 	if (status === 'loading') return <Heading>Checking Authentication...</Heading>
@@ -45,9 +45,9 @@ const Signin = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault()
 
-		if (!email) return false
+		if (!username) return false
 
-		signIn('email', { email, redirect: false })
+		signIn('username', { username, redirect: false })
 	}
 	
 

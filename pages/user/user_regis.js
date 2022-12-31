@@ -1,12 +1,11 @@
 /* eslint-disable @next/next/link-passhref */
-import React,{useReducer} from 'react';
+import React,{useState,useEffect,useReducer} from 'react';
 import { Input,Card,Text,Row,Button} from "@nextui-org/react";
 import Link from 'next/link';
 import { SimpleGrid,Box } from '@chakra-ui/react'
 import { useQueryClient,useMutation } from 'react-query';
 import {addUser} from "../../lib/helper";
 import { useSelector } from 'react-redux';
-
 
 const formReducer=(state,event) =>{
   return{
@@ -17,14 +16,13 @@ const formReducer=(state,event) =>{
 
 
 const regis = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const state = useSelector ((state) => state)
+
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const formData = useReducer(formReducer,{})
+  const [formData,setFormData]=useReducer(formReducer,{})
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const addMutation = useMutation (addUser,{
-    onSuccess:() =>{
+  const addMutation=useMutation(addUser,{
+    onSuccess:()=>{
       console.log("Data insert");
     }   
   });
@@ -56,7 +54,7 @@ const regis = () => {
       type="text"
       label="ชื่อผู้ใช้งาน"
       placeholder="กรุณากรอกชื่อผู้ใช้งาน"
-      
+      onChange={setFormData}
       name="username"
         />
   </Box>
@@ -66,7 +64,7 @@ const regis = () => {
           label="รหัสนักศึกษา" 
           type="text" 
           placeholder="กรุณากรอกรหัสนักศึกษา"
-          
+          onChange={setFormData}
           name="student_id"
         />
    </Box>
@@ -77,7 +75,7 @@ const regis = () => {
           type="password"
           label="รหัสผ่าน"
           placeholder="กรุณากรอกรหัสผ่าน"
-          
+          onChange={setFormData}
           name="password"
         />
      </Box>
@@ -87,7 +85,7 @@ const regis = () => {
           label="ชื่อ-นามสกุล" 
           type="text" 
           placeholder="กรุณาชื่อ-นามสกุล"
-          
+          onChange={setFormData}
           name="student_name"
         />
          </Box>
@@ -96,7 +94,7 @@ const regis = () => {
           label="วัน/เดือน/ปีเกิด" 
           type="date" 
           placeholder="กรุณากรอกวัน/เดือน/ปีเกิด"
-          
+          onChange={setFormData}
           name="student_date"
         />
        </Box>
@@ -106,7 +104,7 @@ const regis = () => {
           label="สาขาวิชา" 
           type="text" 
           placeholder="กรุณากรอกสาขาวิชา"
-          
+          onChange={setFormData}
           name="student_field"
         />
          </Box>
@@ -117,7 +115,7 @@ const regis = () => {
           label="แผนก" 
           type="text" 
           placeholder="กรุณากรอกแผนก"
-          
+          onChange={setFormData}
           name="student_department"
         />
          </Box>
@@ -139,7 +137,7 @@ const regis = () => {
              
 
           
-              <Button size="sm"  color="gradient" onClick={handleSubmit}>
+              <Button size="sm"  color="gradient" type="submit">
                 ยืนยันการสมัครสมาชิก
               </Button>
           

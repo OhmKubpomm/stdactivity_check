@@ -1,6 +1,6 @@
 import bcryptjs from 'bcryptjs';
 import NextAuth from 'next-auth';
-import User from '../../../table/User';
+import User from '../../../model/User';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import db from '../../../database/connectdata';
 db();
@@ -13,13 +13,13 @@ export default NextAuth({
 		  name: 'Credentials',
 		  
 		  credentials: {
-			username: { label: "Username", type: "text", placeholder: "jsmith" },
-			password: {  label: "Password", type: "password" }
+			username: { label: "username", type: "text",  },
+			password: {  label: "password", type: "password" }
 		  },
-		  async authorize(credentials, req) {
-			const email = credentials.email ;
+		  async authorize(credentials,req) {
+			const username = credentials.username ;
 			const password = credentials.password ;
-			const user = await User.findOne ( { email } )
+			const user = await User.findOne ( { username } )
 			if (!user) {
 				throw new Error ( " You haven't registered yet " )
 			}

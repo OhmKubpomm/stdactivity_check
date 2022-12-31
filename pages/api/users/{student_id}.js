@@ -16,7 +16,7 @@ export default async function indexuser(req,res){
         break;
         default:
             res.setHeader('Allow',['GET','PUT','DELETE']);
-            res.status(405).end('Method ${method} Not Allowd');
+            res.status(405).end(`Method ${method} Not Allowd`);
             break;
   }
     
