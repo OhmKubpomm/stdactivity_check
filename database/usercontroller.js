@@ -1,9 +1,6 @@
 //controller//
 import User from '../model/User';
 
-
-
-
 //GET USER
 export async function getUsers(req, res) {
     try {
