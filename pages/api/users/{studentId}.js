@@ -1,5 +1,5 @@
 import db from '../../../database/connectdata';
-import {getUser,putUser,deleteUser} from  '../../../database/usercontroller';
+import {getUser,putUser,deleteUser} from  './usercontroller';
 
 export default async function indexuser(req,res){
     db().catch(() => res.status(405).json({error:"error connect"}));

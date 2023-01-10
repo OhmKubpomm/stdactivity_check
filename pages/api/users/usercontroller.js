@@ -1,5 +1,5 @@
 //controller//
-import User from '../model/User';
+import User from '../../../model/User';
 
 //GET USER
 export async function getUsers(req, res) {
@@ -36,21 +36,6 @@ export async function postUser(req,res){
         const user = new User(formData);
         const savedUser = await user.save();
         return res.status(201).json(savedUser);
-    }
-    catch(error){
-        return res.status(500).json({error:"error while saving data"})
-    }
-}
-//POST MULTIPLE USERS
-export async function postUsers(req,res){
-    try{
-        const formData = req.body;
-        if(!formData)return res.status(400).json({error:"form data not provided"});
-        // map through formData array and create new user instances
-        const users = formData.map(user => new User(user));
-        // insert all user instances into the database
-        const savedUsers = await User.insertMany(users);
-        return res.status(201).json(savedUsers);
     }
     catch(error){
         return res.status(500).json({error:"error while saving data"})
