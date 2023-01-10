@@ -1,5 +1,5 @@
 import db from '../../../database/connectdata';
-import { getUsers, postUser, putUser, deleteUser } from '../../../database/usercontroller';
+import { getUsers, postUser, putUser, deleteUser,postUsers } from '../../../database/usercontroller';
 export default async function indexuser(req, res) {
   try {
     // Connect to the database
@@ -17,6 +17,10 @@ export default async function indexuser(req, res) {
       case 'POST':
         // CREATE NEW USER
         await postUser(req, res);
+        break;
+        case 'POST':
+        // CREATE NEW USER
+        await postUsers(req, res);
         break;
       case 'PUT':
         // UPDATE USER
