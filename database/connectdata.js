@@ -12,4 +12,6 @@ mongoose.connect(process.env.MONGODB_URI,{},err=>{
   console.log('Connection success');
 })
 }
+
+
 export default db;

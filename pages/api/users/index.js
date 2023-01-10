@@ -1,39 +1,39 @@
 import db from '../../../database/connectdata';
-import {getUsers,postUser,putUser,deleteUser} from  '../../../database/controller';
-import axios from 'axios';
-export default async function indexuser(req,res){
-    db().catch(() => res.status(405).json({error:"error connect"}));
+import { getUsers, postUser, putUser, deleteUser } from '../../../database/usercontroller';
+export default async function indexuser(req, res) {
   try {
-    //type of request
-    const {method}=req;
+    // Connect to the database
+    await db().catch(() => res.status(500).json({ error: 'Error connecting to the database' }));
 
-    switch(method){
-        case'GET':
-        
-        getUsers(req,res);
+    // Get the HTTP method from the request
+    const { method } = req;
+
+    // Handle different HTTP methods
+    switch (method) {
+      case 'GET':
+        // GET ALL USERS
+        await getUsers(req, res);
         break;
-
-        case'POST':
-        postUser(req,res);
+      case 'POST':
+        // CREATE NEW USER
+        await postUser(req, res);
         break;
-
-        case'PUT':
-        putUser(req,res);
+      case 'PUT':
+        // UPDATE USER
+        await putUser(req, res);
         break;
-
-        case'DELETE':
-        deleteUser(req,res);
+      case 'DELETE':
+        // DELETE USER
+        await deleteUser(req, res);
         break;
-
-        default:
+      default:
         res.setHeader('Allow', ['GET', 'POST', 'PUT', 'DELETE']);
         res.status(405).end(`Method ${method} Not Allowed`);
-        break;       
+        break;
     }
-} catch (error) {
+  } catch (error) {
     // Handle any errors that may occur during the request
     console.error(error);
     res.status(500).json({ error: 'An error occurred while processing the request' });
   }
 }
-

@@ -1,43 +1,56 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @next/next/link-passhref */
-import React,{useState,useEffect,useReducer} from 'react';
+import React from 'react'
 import { Input,Card,Text,Row,Button} from "@nextui-org/react";
 import Link from 'next/link';
 import { SimpleGrid,Box } from '@chakra-ui/react'
 import { useQueryClient,useMutation } from 'react-query';
-import {addUser} from "../../lib/helper";
-import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router'
+const regis = () => {
+  const [studentId, setStudentId] = useState('')
+  const [studentName, setStudentName] = useState('')
+  const [studentDate, setStudentDate] = useState('')
+  const [studentDepartment, setStudentDepartment] = useState('')
+  const [studentField, setStudentField] = useState('')
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const Router = useRouter()
+  
 
-const formReducer=(state,event) =>{
-  return{
-    ...state,
-    [event.target.name]:event.target.value
+  const handleSubmit = async event => {
+    event.preventDefault()
+    const data = { studentId, studentName, studentDate, studentDepartment, studentField, username, password }
+    // use axios to send data to server to save data to database 
+    try {
+      await axios.post('/api/users', data)
+    } catch (error) {
+      console.error(error)
+    }
   }
+
+  const handleClear = () => {
+    setStudentId('')
+    setStudentName('')
+    setStudentDate('')
+    setStudentDepartment('')
+    setStudentField('')
+    setUsername('')
+    setPassword('')
+  }
+
+  const handleReturn = () => {
+  // logic to redirect back to homepage
+Router.push('/') // assuming you have set up routing using next/router package
 }
 
 
-const regis = () => {
 
+    
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [formData,setFormData]=useReducer(formReducer,{})
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const addMutation=useMutation(addUser,{
-    onSuccess:()=>{
-      console.log("Data insert");
-    }   
-  });
-
-  const handleSubmit = (e) =>{
-    e.preventDefault();
-    if(Object.keys(formData).length == 0 )return console.log("don't have form data");
-    let{student_id,student_name,student_date,student_department,student_field,username,password} = formData;
-
-    const model={
-      student_id,student_name,student_date,student_department,student_field,username,password
-    }
-    addMutation.mutate(model)
-  }
- 
+  
 
     return <SimpleGrid minChildWidth='520px' autoRows autoColumns>
       <Card css={{ mw: "500px" }} shadow="true" >
@@ -54,18 +67,18 @@ const regis = () => {
       type="text"
       label="ชื่อผู้ใช้งาน"
       placeholder="กรุณากรอกชื่อผู้ใช้งาน"
-      onChange={setFormData}
-      name="username"
+      onChange={event => setUsername(event.target.value)}
+      value={username}
         />
   </Box>
   <Box w={[300, 400, 500]}>
         <Input 
         clearable
           label="รหัสนักศึกษา" 
-          type="text" 
+          type="number" 
           placeholder="กรุณากรอกรหัสนักศึกษา"
-          onChange={setFormData}
-          name="student_id"
+          onChange={event => setStudentId(event.target.value)}
+          value={studentId}
         />
    </Box>
    <Box w={[300, 400, 500]}>
@@ -75,8 +88,8 @@ const regis = () => {
           type="password"
           label="รหัสผ่าน"
           placeholder="กรุณากรอกรหัสผ่าน"
-          onChange={setFormData}
-          name="password"
+          onChange={event => setPassword(event.target.value)}
+          value={password}
         />
      </Box>
      <Box w={[300, 400, 500]}>
@@ -85,8 +98,8 @@ const regis = () => {
           label="ชื่อ-นามสกุล" 
           type="text" 
           placeholder="กรุณาชื่อ-นามสกุล"
-          onChange={setFormData}
-          name="student_name"
+          onChange={event => setStudentName(event.target.value)}
+          value={studentName}
         />
          </Box>
          <Box w={[300, 400, 500]}>
@@ -94,8 +107,8 @@ const regis = () => {
           label="วัน/เดือน/ปีเกิด" 
           type="date" 
           placeholder="กรุณากรอกวัน/เดือน/ปีเกิด"
-          onChange={setFormData}
-          name="student_date"
+          onChange={event => setStudentDate(event.target.value)}
+          value={studentDate}
         />
        </Box>
          <Box w={[300, 400, 500]}>
@@ -104,8 +117,8 @@ const regis = () => {
           label="สาขาวิชา" 
           type="text" 
           placeholder="กรุณากรอกสาขาวิชา"
-          onChange={setFormData}
-          name="student_field"
+          onChange={event => setStudentField(event.target.value)}
+          value={studentField}
         />
          </Box>
 
@@ -115,8 +128,8 @@ const regis = () => {
           label="แผนก" 
           type="text" 
           placeholder="กรุณากรอกแผนก"
-          onChange={setFormData}
-          name="student_department"
+          onChange={event => setStudentDepartment(event.target.value)}
+          value={studentDepartment}
         />
          </Box>
   
@@ -124,14 +137,14 @@ const regis = () => {
       
             <Row justify="flex-end">
             
-              <Link href="/indexnotauth">
-            <Button size="sm" light>
+             
+            <Button size="sm" onClick={handleReturn} light>
               กลับไปหน้าหลัก
               </Button>
-              </Link>
+          
      
             
-              <Button size="sm" light>
+              <Button size="sm" onClick={handleClear} light >
               ล้างข้อมูล
               </Button>
              
