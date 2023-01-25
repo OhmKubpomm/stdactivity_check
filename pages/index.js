@@ -1,36 +1,28 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useState } from 'react';
 import { Button,Card,Text,Input,Row,Link,Spacer } from '@nextui-org/react';
-import  Router from 'next/router';
+import {useRouter} from 'next/router';
 import { signIn} from 'next-auth/react';
 
-
 const some = ({ csrfToken, providers}) => {
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [username,setUsername] = useState('');
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [password,setPassword] = useState('');
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [message,setMessage] = useState(null);
+  const router = useRouter()
   
-  const signinUser = async(e) => {
-      e.preventDefault();
-      let options = {redirect:false,username,password}
-      const res = await signIn ("credentials",options)
-      setMessage(null)
-      if (res?.error) {
-        setMessage(res.error)
-      }
-      
-    return Router.push("/");
+ const signinUser = async() => {
+    let options = {redirect:false,username,password}
+    const res = await signIn ("credentials",options)
+    setMessage(null)
+    if (res?.error) {
+      setMessage(res.error)
+    }else{
+      router.push("/")
     }
-    
-    
+  }
 
-  
-	return   <><form action="">
-    <input name="csrfToken" type="hidden" defaultValue={csrfToken}/>
-    <br></br>
+    
+	return   <>
     <Card
       isHoverable variant="bordered"
       css={{ mw: "400px" }}
@@ -51,7 +43,6 @@ const some = ({ csrfToken, providers}) => {
           name="username"
           value={username}
           onChange={e => setUsername(e.target.value)} />
-        <br></br>
         <Input
           rounded
           bordered
@@ -65,31 +56,23 @@ const some = ({ csrfToken, providers}) => {
           onChange={e => setPassword(e.target.value)} />
       </Card.Body>
       <Card.Footer>
-
         <Row justify="flex-end">
           <Link href="./user/user_regis">
             <Button
-             
               w='100%'
               size="sm" color="secondary" auto rounded animated>
-              สมัครสมาชิก
-            </Button>
-          </Link>
-          <Spacer />
-          <p style={{color:'red'}}>{message}</p>
-          <Button size="sm" color="primary" auto rounded animated onClick={(e) => signinUser(e)}>
-            เข้าสู่ระบบ
-          </Button>
-        </Row>
-        
-           
-
-
-      </Card.Footer>
-
-    </Card>
-  </form></>
-
+               สมัครสมาชิก
+  </Button>
+</Link>
+<Spacer />
+<Text size="sm" color="red">{message}</Text>
+<Button size="sm" color="primary" auto rounded animated onClick={signinUser}>
+  เข้าสู่ระบบ
+</Button>
+</Row>
+</Card.Footer>
+</Card>
+</>
 
 }
 

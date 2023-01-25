@@ -13,8 +13,8 @@ export default NextAuth({
 		  name: 'Credentials',
 		  
 		  credentials: {
-			username: { label: "username", type: "text",  },
-			password: {  label: "password", type: "password" }
+			username: { name: "username"  },
+			password: {  name: "password" }
 		  },
 		  async authorize(credentials,req) {
 			const username = credentials.username ;
@@ -39,9 +39,21 @@ export default NextAuth({
 	if(!user.password){
 		throw new Error("Please enter pasword")
 	}
-	const isMatch = await bcryptjs.compare(password,user.password);
-	if(!isMatch){
-		throw new Error("Password not correct")
+	if(req.session.isAdmin){
+		req.session.redirectTo = '/admin_page'
+	}
+	else{
+		req.session.redirectTo = '/user_page'
 	}
 	return user
 }
+
+export const redirect = (req, res) => {
+    if (req.session.redirectTo) {
+        res.writeHead(302, { Location: req.session.redirectTo });
+        res.end();
+    } else {
+        res.json({});
+    }
+};
+

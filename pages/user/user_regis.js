@@ -1,13 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-/* eslint-disable @next/next/link-passhref */
-import React from 'react'
+
 import { Input,Card,Text,Row,Button} from "@nextui-org/react";
 import Link from 'next/link';
-import { SimpleGrid,Box,Alert} from '@chakra-ui/react'
+import { SimpleGrid,Box,Alert,Flex, FormControl} from '@chakra-ui/react'
 import { useQueryClient,useMutation } from 'react-query';
 import axios from 'axios';
 import { useState } from 'react';
-import { useEffect } from 'react';
 import { useRouter } from 'next/router'
 const regis = () => {
   const [studentid, setStudentId] = useState('')
@@ -55,7 +53,10 @@ Router.push('/') // assuming you have set up routing using next/router package
 
   
 
-    return <SimpleGrid minChildWidth='520px' autoRows autoColumns>
+    return <Flex justifyContent="center">
+      
+    <FormControl w={[300, 400, 500]} >
+   
       <Card css={{ mw: "500px" }} shadow="true" >
     <Card.Header>
             <Text h3>สมัครสมาชิก</Text>
@@ -153,7 +154,7 @@ Router.push('/') // assuming you have set up routing using next/router package
              
 
           
-              <Button size="sm"  color="gradient" type="submit" onClick={showAlert}>
+              <Button size="sm"  color="gradient" type="submit" >
                 ยืนยันการสมัครสมาชิก
               </Button>
               
@@ -161,9 +162,10 @@ Router.push('/') // assuming you have set up routing using next/router package
         
           </Card.Footer>
     </form>
-    
+   
     </Card.Body>
   </Card>
-  </SimpleGrid>
+  </FormControl>
+    </Flex>
 }
 export default regis
