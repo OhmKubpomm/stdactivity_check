@@ -3,7 +3,7 @@
 import React from 'react'
 import { Input,Card,Text,Row,Button} from "@nextui-org/react";
 import Link from 'next/link';
-import { SimpleGrid,Box } from '@chakra-ui/react'
+import { SimpleGrid,Box,Alert} from '@chakra-ui/react'
 import { useQueryClient,useMutation } from 'react-query';
 import axios from 'axios';
 import { useState } from 'react';
@@ -18,7 +18,10 @@ const regis = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const Router = useRouter()
-  
+  const showAlert = () => {
+    alert('Submit Successfully');
+    Router.push('/')
+  }
 
   const handleSubmit = async event => {
     event.preventDefault()
@@ -150,14 +153,15 @@ Router.push('/') // assuming you have set up routing using next/router package
              
 
           
-              <Button size="sm"  color="gradient" type="submit">
+              <Button size="sm"  color="gradient" type="submit" onClick={showAlert}>
                 ยืนยันการสมัครสมาชิก
               </Button>
-          
+              
             </Row>
         
           </Card.Footer>
     </form>
+    
     </Card.Body>
   </Card>
   </SimpleGrid>
